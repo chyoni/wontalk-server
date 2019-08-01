@@ -1,0 +1,9 @@
+type SeeUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  seeUser(username: String!): SeeUserResponse!
+}

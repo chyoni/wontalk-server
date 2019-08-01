@@ -1,25 +1,14 @@
 import { GraphQLServer } from "graphql-yoga";
+import schema from "./schema";
 import cors from "cors";
 import helmet from "helmet";
 import logger from "morgan";
-
-const typeDefs = `
-    type Query {
-        something: String!
-    }
-`;
-const resolvers = {
-  Query: {
-    something: () => "something"
-  }
-};
 
 class App {
   public app: GraphQLServer;
   constructor() {
     this.app = new GraphQLServer({
-      typeDefs,
-      resolvers
+      schema
     });
     this.middlewares();
   }

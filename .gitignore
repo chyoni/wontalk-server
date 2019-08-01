@@ -61,3 +61,7 @@ typings/
 .next
 yarn-error.log
 .env
+generated
+yarn.lock
+prisma.yml
+datamodel.prisma

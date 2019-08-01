@@ -1,0 +1,64 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  avatar: String
+  firstName: String
+  lastName: String
+  bio: String
+  secret: String
+  room: [Room!]
+  message: [Message!]
+  friends: [User!]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Room {
+  id: ID!
+  entrant: [User!]!
+  messages: [Message!]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: ID!
+  text: String!
+  user: User!
+  room: Room!
+  createdAt: String!
+  updatedAt: String
+}
+
+type ConfirmSecretResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  confirmSecret(email: String!, secret: String!): ConfirmSecretResponse!
+  createUser(email: String!, username: String!): CreateUserResponse!
+  requestSecret(email: String!): RequestSecretResponse!
+}
+
+type CreateUserResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RequestSecretResponse {
+  ok: Boolean!
+  error: String
+}
+
+type SeeUserResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  seeUser(username: String!): SeeUserResponse!
+}

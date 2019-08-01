@@ -1,0 +1,32 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  avatar: String
+  firstName: String
+  lastName: String
+  bio: String
+  secret: String
+  room: [Room!]
+  message: [Message!]
+  friends: [User!]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Room {
+  id: ID!
+  entrant: [User!]!
+  messages: [Message!]
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: ID!
+  text: String!
+  user: User!
+  room: Room!
+  createdAt: String!
+  updatedAt: String
+}
