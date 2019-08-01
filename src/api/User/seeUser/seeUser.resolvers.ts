@@ -3,7 +3,12 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Query: {
-    seeUser: async (_, args: SeeUserQueryArgs): Promise<SeeUserResponse> => {
+    seeUser: async (
+      _,
+      args: SeeUserQueryArgs,
+      { request, withAuth }
+    ): Promise<SeeUserResponse> => {
+      withAuth(request);
       const { username } = args;
       try {
         const user = await prisma.user({ username });
