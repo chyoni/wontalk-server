@@ -1,0 +1,8 @@
+type AddFriendResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  addFriend(friendId: String!): AddFriendResponse!
+}

@@ -1,3 +1,23 @@
+type Subscription {
+  newMessage(userId: String!): Message
+}
+
+type SendMessageResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  sendMessage(roomId: String!, text: String!): SendMessageResponse!
+  createRoom(you: [String!]!): CreateRoomResponse!
+  deleteRoom(roomId: String!): DeleteRoomResponse!
+  addFriend(friendId: String!): AddFriendResponse!
+  confirmSecret(email: String!, secret: String!): ConfirmSecretResponse!
+  createUser(email: String!, username: String!): CreateUserResponse!
+  editUser(username: String!, avatar: String, firstName: String, lastName: String, bio: String): EditUserResponse!
+  requestSecret(email: String!): RequestSecretResponse!
+}
+
 type User {
   id: ID!
   username: String!
@@ -7,19 +27,23 @@ type User {
   lastName: String
   bio: String
   secret: String
-  room: [Room!]
-  message: [Message!]
-  friends: [User!]
+  room: [Room!]!
+  message: [Message!]!
+  friends: [User!]!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
 }
 
 type Room {
   id: ID!
   entrant: [User!]!
-  messages: [Message!]
+  messages: [Message!]!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
 }
 
 type Message {
@@ -29,6 +53,36 @@ type Message {
   room: Room!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
+}
+
+type CreateRoomResponse {
+  ok: Boolean!
+  error: String
+  room: Room
+}
+
+type DeleteRoomResponse {
+  ok: Boolean!
+  error: String
+}
+
+type SeeRoomResponse {
+  ok: Boolean!
+  error: String
+  room: Room
+}
+
+type Query {
+  seeRoom(roomId: String!): SeeRoomResponse!
+  seeMe: User!
+  seeUser(username: String!): SeeUserResponse!
+}
+
+type AddFriendResponse {
+  ok: Boolean!
+  error: String
 }
 
 type ConfirmSecretResponse {
@@ -37,13 +91,12 @@ type ConfirmSecretResponse {
   token: String
 }
 
-type Mutation {
-  confirmSecret(email: String!, secret: String!): ConfirmSecretResponse!
-  createUser(email: String!, username: String!): CreateUserResponse!
-  requestSecret(email: String!): RequestSecretResponse!
+type CreateUserResponse {
+  ok: Boolean!
+  error: String
 }
 
-type CreateUserResponse {
+type EditUserResponse {
   ok: Boolean!
   error: String
 }
@@ -57,8 +110,4 @@ type SeeUserResponse {
   ok: Boolean!
   error: String
   user: User
-}
-
-type Query {
-  seeUser(username: String!): SeeUserResponse!
 }

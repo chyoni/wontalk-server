@@ -1,27 +1,22 @@
 import { prisma } from "../../../generated/prisma-client";
 
 export default {
-  User: {
-    room: parent => {
-      return prisma.user({ id: parent.id }).room({ orderBy: "createdAt_DESC" });
+  Room: {
+    entrant: parent => {
+      return prisma.room({ id: parent.id }).entrant();
     },
-    friends: parent => {
+    messages: parent => {
       return prisma
-        .user({ id: parent.id })
-        .friends({ orderBy: "username_ASC" });
-    },
-    message: parent => {
-      return prisma
-        .user({ id: parent.id })
-        .message({ orderBy: "createdAt_ASC" });
+        .room({ id: parent.id })
+        .messages({ orderBy: "createdAt_ASC" });
     },
     createdDate: async (parent): Promise<string> => {
-      const createdAt = await prisma.user({ id: parent.id }).createdAt();
+      const createdAt = await prisma.room({ id: parent.id }).createdAt();
       const [date] = createdAt.split("T");
       return date;
     },
     createdTime: async (parent): Promise<string> => {
-      const createdAt = await prisma.user({ id: parent.id }).createdAt();
+      const createdAt = await prisma.room({ id: parent.id }).createdAt();
       const [, time] = createdAt.split("T");
       const [realTime] = time.split(".");
       const [h, m, s] = realTime.split(":");

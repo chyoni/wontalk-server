@@ -7,19 +7,23 @@ type User {
   lastName: String
   bio: String
   secret: String
-  room: [Room!]
-  message: [Message!]
-  friends: [User!]
+  room: [Room!]!
+  message: [Message!]!
+  friends: [User!]!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
 }
 
 type Room {
   id: ID!
   entrant: [User!]!
-  messages: [Message!]
+  messages: [Message!]!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
 }
 
 type Message {
@@ -29,4 +33,6 @@ type Message {
   room: Room!
   createdAt: String!
   updatedAt: String
+  createdDate: String
+  createdTime: String
 }

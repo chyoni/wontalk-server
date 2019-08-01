@@ -1,0 +1,9 @@
+type CreateRoomResponse {
+  ok: Boolean!
+  error: String
+  room: Room
+}
+
+type Mutation {
+  createRoom(you: [String!]!): CreateRoomResponse!
+}
