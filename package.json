@@ -1,0 +1,20 @@
+{
+  "name": "wontalk-server",
+  "version": "1.0.0",
+  "description": "GraphQL Subscription with Typescript for server",
+  "main": "index.js",
+  "repository": "https://github.com/chiwon99881/wontalk-server",
+  "author": "Chiwon <chiwon99881@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "babel-runtime": "^6.26.0",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts"
+  }
+}
