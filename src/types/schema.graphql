@@ -1,5 +1,5 @@
 type Subscription {
-  newMessage(userId: String!): Message
+  newMessage(roomId: String!): Message
 }
 
 type SendMessageResponse {
@@ -30,6 +30,7 @@ type User {
   room: [Room!]!
   message: [Message!]!
   friends: [User!]!
+  isFriends: Boolean!
   createdAt: String!
   updatedAt: String
   createdDate: String
@@ -76,6 +77,7 @@ type SeeRoomResponse {
 
 type Query {
   seeRoom(roomId: String!): SeeRoomResponse!
+  searchUser(term: String!): SearchUserResponse!
   seeMe: User!
   seeUser(username: String!): SeeUserResponse!
 }
@@ -104,6 +106,12 @@ type EditUserResponse {
 type RequestSecretResponse {
   ok: Boolean!
   error: String
+}
+
+type SearchUserResponse {
+  ok: Boolean!
+  error: String
+  user: [User]
 }
 
 type SeeUserResponse {

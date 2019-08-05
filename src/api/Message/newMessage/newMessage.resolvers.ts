@@ -5,9 +5,7 @@ export default {
   Subscription: {
     newMessage: {
       subscribe: async (_, args: NewMessageSubscriptionArgs) => {
-        const { userId } = args;
-        const userRooms = await prisma.user({ id: userId }).room();
-        console.log(userRooms);
+        const { roomId } = args;
         return prisma.$subscribe
           .message({
             AND: [
@@ -16,8 +14,9 @@ export default {
                 AND: [
                   {
                     node: {
-                      room: { id_in: [...userRooms.map(room => room.id)] },
-                      user: { id_not: userId }
+                      room: { id: roomId }
+                      // room: { id_in: [...userRooms.map(room => room.id)] },
+                      // user: { id_not: userId }
                     }
                   }
                 ]

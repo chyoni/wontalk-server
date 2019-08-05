@@ -15,6 +15,12 @@ export default {
         .user({ id: parent.id })
         .message({ orderBy: "createdAt_ASC" });
     },
+    isFriends: (parent, __, { request }) => {
+      const { user } = request;
+      return prisma.$exists.user({
+        AND: [{ id: user.id }, { friends_some: { id: parent.id } }]
+      });
+    },
     createdDate: async (parent): Promise<string> => {
       const createdAt = await prisma.user({ id: parent.id }).createdAt();
       const [date] = createdAt.split("T");
